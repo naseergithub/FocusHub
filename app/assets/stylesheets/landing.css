@@ -1,0 +1,9 @@
+/*
+ *= require plugins/bootstrap/bootstrap.min.css
+ *= require plugins/themify-icons/themify-icons.css
+ *= require plugins/slick/slick.css
+ *= require plugins/Venobox/venobox.css
+ *= require plugins/aos/aos.css
+ *= require css/style.css
+ *= require_self
+ */
