@@ -2,7 +2,10 @@
 <section class="fixed-top navigation">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="index.html"><img src="/assets/logo.png" alt="logo"></a>
+      
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <%= image_tag "dashboard/logos/focushub-logo.png", alt: "logo", class: "img-fluid" %>
+      <% end %>
       <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,7 +35,16 @@
             <a class="nav-link" href="contact.html">Contact</a>
           </li>
         </ul>
-        <a href="#" class="btn btn-primary ml-lg-3 primary-shadow">Try Free</a>
+        <% unless user_signed_in? %>
+        <%= link_to 'Login', new_user_session_path ,class: 'btn btn-primary ml-lg-3 primary-shadow' %>
+        <% else %>
+        <%= button_to(
+                        "Logout",
+                        destroy_user_session_path,
+                        method: :delete,
+                        class: "btn btn-primary ml-lg-3 primary-shadow"
+                      ) %>
+        <% end %>
       </div>
     </nav>
   </div>
@@ -48,7 +60,9 @@
           Project and Team</h1>
         <p class="mb-4">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum<br>
           dolore eu fugiat nulla pariatur.</p>
-        <a href="#" class="btn btn-secondary btn-lg">explore us</a>
+        <% unless user_signed_in? %>
+          <%= link_to 'Sign Up', new_user_registration_path ,class: 'btn btn-secondary btn-lg' %>
+        <% end %>
         <!-- banner image -->
         <img class="img-fluid w-100 banner-image" src="/assets/hero-area/banner-img.png" alt="banner-img">
       </div>
@@ -393,9 +407,10 @@
     <div class="row">
       <div class="col-lg-4 text-center text-lg-left mb-4 mb-lg-0">
         <!-- logo -->
-        <a href="index.html">
-          <img class="img-fluid" src="/assets/logo.png" alt="logo">
-        </a>
+        
+        <%= link_to root_path do %>
+          <%= image_tag "dashboard/logos/focushub-logo.png", alt: "logo", class: "img-fluid" %>
+        <% end %>
       </div>
       <!-- footer menu -->
       <nav class="col-lg-8 align-self-center mb-5">

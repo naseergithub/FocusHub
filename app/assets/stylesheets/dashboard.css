@@ -2,3 +2,26 @@
  *= require css/styles.min.css
  *= require_self
 */
+.fill-available {
+  width: -webkit-fill-available;
+}
+.app-header .button_to {
+  width: auto;
+}
+.error {
+  color: red;
+}
+.amber {
+  background-color: #ffc107;
+}
+.teal {
+  background-color: #17a2b8;
+}
+.green {
+  background-color: #28a745;
+}
+.red {
+  background-color: #dc3545;
+}
+.cat_badge {
+}

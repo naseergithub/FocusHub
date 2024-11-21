@@ -15,19 +15,18 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-
     <%= stylesheet_link_tag "dashboard", "data-turbo-track": "reload" %>
-    
   </head>
 
   <body>
   <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
       data-sidebar-position="fixed" data-header-position="fixed">
-      
       <%= render "layouts/dashboard_sidebar" %>
-      <%= yield %>
-
+      <div class="body-wrapper">
+        <%=render "dashboard/shared/dashboard_header" %>
+        <%= yield %>
+      </div>
     </div>
     <%= javascript_include_tag "dashboard", "data-turbo-track": "reload" %>
   </body>
