@@ -23,5 +23,87 @@
 .red {
   background-color: #dc3545;
 }
-.cat_badge {
+
+/* TODO fix css for side nav */
+/* Target the pagination container */
+.pagination-box nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* Style the span elements directly (like .first, .next, etc.) */
+.pagination-box nav span {
+  margin: 0 5px;
+}
+
+/* Style the links inside the span elements */
+.pagination-box nav span a {
+  display: inline-block;
+  padding: 8px 14px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #007bff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect for links */
+.pagination-box nav span a:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Active span (no link, current page) */
+.pagination-box nav span.active {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: default;
+}
+
+/* Disabled span (for unavailable links) */
+.pagination-box nav span.disabled {
+  color: #ccc;
+  background-color: #f9f9f9;
+  border-color: #ddd;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-weight: normal;
+  cursor: not-allowed;
+}
+
+/* Add shadows for links to make them stand out */
+.pagination-box nav span a {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagination-box nav span a:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* First and last link enhancements */
+.pagination-box nav span.first a,
+.pagination-box nav span.last a {
+  font-weight: bold;
+}
+
+/* Adjust for mobile responsiveness */
+@media (max-width: 576px) {
+  .pagination-box nav {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .pagination-box nav span {
+    margin: 2px;
+  }
 }

@@ -1,18 +1,23 @@
 module Dashboard
     class TasksController < BaseController
-      include ActionView::Helpers::SanitizeHelper
+        load_and_authorize_resource
+        include ActionView::Helpers::SanitizeHelper
 
-        before_action :set_task, only: %i[ show edit update destroy ]
-      
-        # GET /tasks or /tasks.json
+        rescue_from CanCan::AccessDenied do |exception|
+            redirect_to not_authorized_dashboard_tasks_path, alert: "You are not authorized to perform this action."
+        end
+
+        # GET /tasks/search
         def search
-          @tasks = params.has_key?(:q) ? Task.search(remove_tags(filter_search_query)) : []
-          render 'index'
+          index
+          render :index
         end
 
         # GET /tasks or /tasks.json
         def index
-          @tasks = Task.all
+          @tasks = Task.accessible_by(current_ability)
+          @q = @tasks.ransack(params[:q])
+          @tasks = @q.result(distinct: true).page(params[:page]).per(2)
         end
       
         # GET /tasks/1 or /tasks/1.json
@@ -68,23 +73,9 @@ module Dashboard
         end
       
         private
-          # Use callbacks to share common setup or constraints between actions.
-          def set_task
-            @task = Task.find(params[:id])
-          end
-      
           # Only allow a list of trusted parameters through.
           def task_params
             params.require(:task).permit(:title, :description, :due_date, :status, :category)
-          end
-
-          def filter_search_query
-            params.require(:q).permit(:title, :category, :due_date, :status) 
-          end
-          def remove_tags(query)
-            q_params = {}
-            query.keys.each{|k| q_params[k] = strip_tags(query[k]) }
-            q_params
           end
     end   
 end

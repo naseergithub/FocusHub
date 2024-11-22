@@ -1,24 +1,24 @@
 class Task < ApplicationRecord
-    enum status: {to_do: 0,in_progress: 1,pause: 2,completed: 3}
     belongs_to :user
+
     validates :title, :category, :status, :description, :due_date, presence: true
-    validates :status, inclusion: { in: %w(to_do in_progress pause completed ),
+    validates :status, inclusion: { in: %w(to_do in_progress paused completed ),
     message: "%{value} is not a valid status" }
-
-    scope :with_title, ->(title) { where('title ILIKE ?', "%#{title}%") if title.present? }
-    scope :with_category, ->(category) { where('category ILIKE ?', "%#{category}%") if category.present? }
-    scope :with_status, ->(status) { where(status: statuses[status]) if status.present? }
-    scope :with_due_date, ->(due_date) { where(due_date: due_date) if due_date.present? }
-
 
     before_save :create_category_if_not_exists
 
-    def self.search(params)
-        query = Task.with_title(params["title"])
-        query = query.with_category(params["category"])
-        query = query.with_status(params["status"])
-        query = query.with_due_date(params["due_date"]) if params["due_date"].present?
-        query
+    enum status: {to_do: 0,in_progress: 1,paused: 2,completed: 3}
+    ransacker :status do
+        Arel.sql("CASE 
+                    WHEN status = 0 THEN 'to_do' 
+                    WHEN status = 1 THEN 'in_progress'
+                    WHEN status = 2 THEN 'paused' 
+                    WHEN status = 3 THEN 'completed'
+                  END")
+    end
+
+    def self.ransackable_attributes(auth_object = nil)
+        ["category", "due_date", "status", "title"]
     end
 
     private

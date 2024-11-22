@@ -25,8 +25,8 @@
             </p>
 
             <div class="d-flex">
-              <%= link_to "Edit this task", edit_dashboard_task_path(task), class: 'btn btn-success' %>
-              <%= button_to "Destroy this task", dashboard_task_path(task), method: :delete, class: 'btn btn-danger mx-3' %>
+              <%= link_to "Edit Task", edit_dashboard_task_path(task), class: 'btn btn-success' %>
+              <%= button_to "Destroy Task", dashboard_task_path(task), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} ,class: 'btn btn-danger mx-3' %>
               <%= link_to "Back to tasks", dashboard_tasks_path, class: 'btn btn-light' %> 
             </div>
 

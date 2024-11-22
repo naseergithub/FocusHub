@@ -7,3 +7,6 @@
  *= require css/style.css
  *= require_self
  */
+.m-auto {
+  margin: 0 auto;
+}

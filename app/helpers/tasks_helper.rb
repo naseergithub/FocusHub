@@ -14,11 +14,16 @@ module TasksHelper
                     "badge amber"
                 when 'in_progress'
                     "badge teal"
-                when 'pause'
+                when 'paused'
                     "badge red"
                 when 'completed'
                     "badge green"
                 end
         content_tag(:span, "#{status.titleize}", class: "#{classes}")
     end
+
+    def task_action_label(task)
+        task.new_record? ? 'Create Task' : 'Update Task' 
+    end
+
 end

@@ -7,26 +7,28 @@
         <div class="card-body p-4">
           <div class="">
             <h5 class="mb-0 fw-bold">Search Tasks</h5>
-            <%= form_with(scope: :q, url: search_dashboard_tasks_path, method: :get, class: 'd-flex justify-content-around align-items-center mt-4') do |form| %>
-            
-                  <div class="mb-3">
-                    <%= form.label :title, class: 'form-label' %>
-                    <%= form.text_field :title, class: 'form-control', value: params.dig(:q, :title) %>
-                  </div>
-                  <div class="mb-3">
-                    <%= form.label :category, class: 'form-label' %>
-                    <%= form.text_field :category, class: 'form-control', value: params.dig(:q, :category) %>
-                  </div>
-                  <div class="mb-3">
-                    <%= form.label :status, class: 'form-label' %>
-                    <%= form.select :status, task_statuses_list, {selected: params.dig(:q, :status), prompt: 'Select Status'}, class: 'form-select' %>
-                  </div>
-                  <div class="mb-4">
-                    <%= form.label :due_date, class: 'form-label' %>
-                    <%= form.date_field :due_date, class: 'form-control', value: params.dig(:q, :due_date) %>
-                  </div>
-                  <div><button class="btn btn-primary w-100 fs-4 rounded-2">Search</button></div>
-                  <div><%=link_to "Clear Filters", dashboard_tasks_path, class: 'btn btn-light' %></div>
+            <%= search_form_for @q, url: search_dashboard_tasks_path,
+                        html: { method: :post, class: 'd-flex justify-content-around align-items-center mt-4' } do |f| %>
+              <div>
+              <%= f.label :title_cont, class: 'form-label' %>
+              <%= f.search_field :title_cont, class: 'form-control', value: @q.title_cont %>
+              </div>
+
+              <div>
+              <%= f.label :category_cont, class: 'form-label' %>
+              <%= f.search_field :category_cont, class: 'form-control', value: @q.category_cont %>
+              </div>
+
+              <div>
+                <%= f.label :status_eq, class: 'form-label' %>
+                <%= f.select :status_eq, task_statuses_list, {selected: @q.status_eq, prompt: 'Select Status'}, class: 'form-select' %>
+              </div>
+              <div>
+                <%= f.label :due_date_eq, class: 'form-label' %>
+                <%= f.date_field :due_date_eq, class: 'form-control', value: @q.due_date_eq %>
+              </div>
+              <div class="mt-4"><%= f.submit "Search", class: "btn btn-primary" %></div>
+              <div class="mt-4"><%=link_to "Clear Filters", dashboard_tasks_path, class: 'btn btn-light' %></div>
             <% end %>
           </div>
         </div>
@@ -106,7 +108,7 @@
                       <path d="M16 5l3 3" />
                       </svg>
                     <% end %>
-                    <%=button_to dashboard_task_path(task), method: :delete, class: 'btn btn-link p-0' do %>
+                    <%=button_to dashboard_task_path(task),class: 'btn btn-link p-0',method: :delete ,data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
                       <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash text-danger">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                       <path d="M4 7l16 0" /><path d="M10 11l0 6" />
@@ -121,6 +123,7 @@
               </tbody>
             </table>
           </div>
+          <div class="pagination-box"><%= paginate @tasks %></div>
         </div>
       </div>
     </div>
