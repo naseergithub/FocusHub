@@ -17,7 +17,7 @@ module Dashboard
         def index
           @tasks = Task.accessible_by(current_ability)
           @q = @tasks.ransack(params[:q])
-          @tasks = @q.result(distinct: true).page(params[:page]).per(2)
+          @tasks = @q.result(distinct: true).page(params[:page]).per(15)
         end
       
         # GET /tasks/1 or /tasks/1.json
