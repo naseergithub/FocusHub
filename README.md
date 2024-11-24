@@ -5,20 +5,22 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+- How to setup rails web app on local machine.
 
-* System dependencies
+- Install required Ruby and Rails version specified in Gemfile
 
-* Configuration
+- run bundle install
 
-* Database creation
+- Setup Databases for development and test environments
 
-* Database initialization
+- run rails s
 
-* How to run the test suite
+- go to http://localhost:3000 and sign up or login to view application.
 
-* Services (job queues, cache servers, search engines, etc.)
+- How to run the test suite
 
-* Deployment instructions
+- Setup development and test environments like setting up databases if you have not already done so.
 
-* ...
+- Run 'bundle exec rspec' to run all unit and feature tests. it should show 20 examples, 0 failures.
+
+- Thats it.

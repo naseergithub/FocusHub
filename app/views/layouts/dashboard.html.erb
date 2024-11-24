@@ -4,7 +4,7 @@
   <meta charset="utf-8">
     <title><%= content_for(:title) || "Focushub" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -15,8 +15,7 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-    <%= stylesheet_link_tag "dashboard", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "turbo", type: "module" %>
+    <%= stylesheet_link_tag "dashboard" %>
   </head>
 
   <body>
@@ -29,6 +28,6 @@
         <%= yield %>
       </div>
     </div>
-    <%= javascript_include_tag "dashboard", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "dashboard" %>
   </body>
 </html>

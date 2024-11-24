@@ -30,7 +30,7 @@
   
     <div class="mb-3">
       <%= form.label :status, class: 'form-label' %>
-      <%= form.select :status, task_statuses_list, {selected: form.object.status, prompt: 'Select Status'}, class: 'form-select' %>
+      <%= form.select :status, task_statuses_list, {selected: form.object.status}, class: 'form-select' %>
       <%=error_message(task, :status)%>
     </div>
   

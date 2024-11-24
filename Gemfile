@@ -43,6 +43,9 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+  gem 'rspec-rails'
+  gem 'capybara', '~> 3.35'
+  gem "selenium-webdriver"
 end
 
 group :development do
@@ -52,11 +55,10 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
 end
 
 gem "devise", "~> 4.9"
 gem 'cancancan'
 gem 'kaminari'
 gem 'ransack'
+gem 'webdrivers'
