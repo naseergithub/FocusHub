@@ -1,7 +1,6 @@
 module Dashboard
     class TasksController < BaseController
         load_and_authorize_resource
-        include ActionView::Helpers::SanitizeHelper
 
         rescue_from CanCan::AccessDenied do |exception|
             redirect_to not_authorized_dashboard_tasks_path, alert: "You are not authorized to perform this action."
@@ -15,7 +14,7 @@ module Dashboard
 
         # GET /tasks or /tasks.json
         def index
-          @tasks = Task.accessible_by(current_ability)
+          @tasks = Task.includes(:user).accessible_by(current_ability)
           @q = @tasks.ransack(params[:q])
           @tasks = @q.result(distinct: true).page(params[:page]).per(15)
         end
